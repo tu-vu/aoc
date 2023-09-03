@@ -41,7 +41,7 @@ func calorieCountingPart2(input string) int {
 
 	caloSoFar := 0 // Total calo carried by an elf so far
 	for _, line := range strings.Split(input, "\n") {
-		caloInt, err := strconv.Atoi(line)
+		calo, err := strconv.Atoi(line)
 		if err != nil {
 			// End of inventory for current elf
 			// Check if total calo exceeds each max, swap their values if so
@@ -59,7 +59,7 @@ func calorieCountingPart2(input string) int {
 			// Reset total calo
 			caloSoFar = 0
 		} else {
-			caloSoFar += caloInt
+			caloSoFar += calo
 		}
 	}
 	return maxCalo1 + maxCalo2 + maxCalo3
