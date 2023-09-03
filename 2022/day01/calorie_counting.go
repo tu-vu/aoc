@@ -1,37 +1,25 @@
-package d1_calorie_counting
+package day01
 
 import (
-	"bufio"
-	"os"
+	_ "embed"
 	"strconv"
 	"strings"
 )
 
-func calorieCountingPart1(filePath string) int {
-	// Max calo carried by an elf
-	maxCalo := -1
+//go:embed input.txt
+var content string // Embed file content into string
 
-	// Open the file
-	file, err := os.Open(filePath)
-	if err != nil {
-		return maxCalo
-	}
-	defer file.Close()
+func init() {
+	// Preprocess input here, so it applies to test
+	// Append a newline to content for consistency
+	content += "\n"
+}
 
-	// Parse the data
+func calorieCountingPart1(input string) int {
+	maxCalo := -1  // Max calo carried by an elf
 	caloSoFar := 0 // Total calo carried by an elf so far
-	reader := bufio.NewReader(file)
-	for {
-		caloStr, err := reader.ReadString('\n')
-		if err != nil {
-			// EOF
-			break
-		}
-
-		// Trim trailing new line character
-		caloStr = strings.TrimSuffix(caloStr, "\n")
-
-		caloInt, err := strconv.Atoi(caloStr)
+	for _, line := range strings.Split(input, "\n") {
+		calo, err := strconv.Atoi(line)
 		if err != nil {
 			// End of inventory for current elf
 			// Check if total calo exceeds max before reset
@@ -40,41 +28,24 @@ func calorieCountingPart1(filePath string) int {
 			}
 			caloSoFar = 0
 		} else {
-			caloSoFar += caloInt
+			caloSoFar += calo
 		}
 	}
 	return maxCalo
 }
 
-func calorieCountingPart2(filePath string) int {
+func calorieCountingPart2(input string) int {
 	maxCalo1 := -1 // Top 1 calo carried by an elf
 	maxCalo2 := -1 // Top 2 calo carried by an elf
 	maxCalo3 := -1 // Top 3 calo carried by an elf
 
-	// Open the file
-	file, err := os.Open(filePath)
-	if err != nil {
-		return -1
-	}
-	defer file.Close()
-
-	// Parse the data
 	caloSoFar := 0 // Total calo carried by an elf so far
-	reader := bufio.NewReader(file)
-	for {
-		caloStr, err := reader.ReadString('\n')
-		if err != nil {
-			// EOF
-			break
-		}
-		// Trim trailing new line character
-		caloStr = strings.TrimSuffix(caloStr, "\n")
-
-		caloInt, err := strconv.Atoi(caloStr)
+	for _, line := range strings.Split(input, "\n") {
+		caloInt, err := strconv.Atoi(line)
 		if err != nil {
 			// End of inventory for current elf
 			// Check if total calo exceeds each max, swap their values if so
-			// This is because we want to retain the values of each max as
+			// This is because we want to persist the values of each max as
 			// they are likely to be the candidate for next max
 			if caloSoFar > maxCalo1 {
 				caloSoFar, maxCalo1 = maxCalo1, caloSoFar
@@ -85,7 +56,6 @@ func calorieCountingPart2(filePath string) int {
 			if caloSoFar > maxCalo3 {
 				maxCalo3 = caloSoFar
 			}
-
 			// Reset total calo
 			caloSoFar = 0
 		} else {
