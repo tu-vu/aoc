@@ -7,11 +7,6 @@ import (
 	"strings"
 )
 
-/*
-   Input - Calories from each elf
-
-*/
-
 func calorieCountingPart1(filePath string) int {
 	// Max calo carried by an elf
 	maxCalo := -1
@@ -72,7 +67,6 @@ func calorieCountingPart2(filePath string) int {
 			// EOF
 			break
 		}
-
 		// Trim trailing new line character
 		caloStr = strings.TrimSuffix(caloStr, "\n")
 
@@ -83,10 +77,10 @@ func calorieCountingPart2(filePath string) int {
 			// This is because we want to retain the values of each max as
 			// they are likely to be the candidate for next max
 			if caloSoFar > maxCalo1 {
-				caloSoFar, maxCalo1 = swap(caloSoFar, maxCalo1)
+				caloSoFar, maxCalo1 = maxCalo1, caloSoFar
 			}
 			if caloSoFar > maxCalo2 {
-				caloSoFar, maxCalo2 = swap(caloSoFar, maxCalo2)
+				caloSoFar, maxCalo2 = maxCalo2, caloSoFar
 			}
 			if caloSoFar > maxCalo3 {
 				maxCalo3 = caloSoFar
@@ -99,8 +93,4 @@ func calorieCountingPart2(filePath string) int {
 		}
 	}
 	return maxCalo1 + maxCalo2 + maxCalo3
-}
-
-func swap(a int, b int) (int, int) {
-	return b, a
 }
