@@ -1,14 +1,16 @@
 package day01
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestCalorieCountingPart1(t *testing.T) {
 	tests := []struct {
-		name  string
-		input string
-		want  int
+		name    string
+		input   string
+		want    int
+		wantErr error
 	}{
 		{
 			name:  "source",
@@ -18,9 +20,8 @@ func TestCalorieCountingPart1(t *testing.T) {
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			if got := calorieCountingPart1(tc.input); got != tc.want {
-				t.Errorf("got %v, want %v", got, tc.want)
-			}
+			got := calorieCountingPart1(tc.input)
+			assert.Equal(t, tc.want, got)
 		})
 	}
 }
@@ -39,9 +40,8 @@ func TestCalorieCountingPart2(t *testing.T) {
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			if got := calorieCountingPart2(tc.input); got != tc.want {
-				t.Errorf("got %v, want %v", got, tc.want)
-			}
+			got := calorieCountingPart2(tc.input)
+			assert.Equal(t, tc.want, got)
 		})
 	}
 }

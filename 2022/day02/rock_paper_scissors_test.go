@@ -1,14 +1,16 @@
 package day02
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestRockPaperScissorsPart1(t *testing.T) {
 	tests := []struct {
-		name  string
-		input string
-		want  int
+		name    string
+		input   string
+		want    int
+		wantErr error
 	}{
 		{
 			name:  "source",
@@ -19,11 +21,10 @@ func TestRockPaperScissorsPart1(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
 			got, err := rockPaperScissorsPart1(tc.input)
-			if err != nil {
-				t.Error(err)
-			}
-			if got != tc.want {
-				t.Errorf("got %v, want %v", got, tc.want)
+			if tc.wantErr != nil {
+				assert.EqualError(t, err, tc.wantErr.Error())
+			} else {
+				assert.Equal(t, tc.want, got)
 			}
 		})
 	}
@@ -31,9 +32,10 @@ func TestRockPaperScissorsPart1(t *testing.T) {
 
 func TestRockPaperScissorsPart2(t *testing.T) {
 	tests := []struct {
-		name  string
-		input string
-		want  int
+		name    string
+		input   string
+		want    int
+		wantErr error
 	}{
 		{
 			name:  "source",
@@ -44,11 +46,10 @@ func TestRockPaperScissorsPart2(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
 			got, err := rockPaperScissorsPart2(tc.input)
-			if err != nil {
-				t.Error(err)
-			}
-			if got != tc.want {
-				t.Errorf("got %v, want %v", got, tc.want)
+			if tc.wantErr != nil {
+				assert.EqualError(t, err, tc.wantErr.Error())
+			} else {
+				assert.Equal(t, tc.want, got)
 			}
 		})
 	}
