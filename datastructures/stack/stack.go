@@ -6,6 +6,10 @@ import (
 
 type Stack[T any] []T
 
+func New[T any]() *Stack[T] {
+	return new(Stack[T])
+}
+
 // IsEmpty returns true if the stack is empty.
 func (s *Stack[T]) IsEmpty() bool {
 	return len(*s) == 0
@@ -27,6 +31,9 @@ func (s *Stack[T]) Pop() (T, error) {
 }
 
 // Peek returns the top value from the stack without removing it.
-func (s *Stack[T]) Peek() T {
-	return (*s)[len(*s)-1]
+func (s *Stack[T]) Peek() (T, error) {
+	if s.IsEmpty() {
+		return *new(T), errors.New("stack is empty")
+	}
+	return (*s)[len(*s)-1], nil
 }
