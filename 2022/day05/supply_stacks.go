@@ -71,10 +71,10 @@ func buildCrateDeques(lines []string, deques []*deque.Deque[string]) (int, error
 // rearrangeCrateDeques rearrange deques of crates given a list of procedure
 func rearrangeCrateDeques(index int, lines []string, deques []*deque.Deque[string], part int) error {
 	for i := index; i < len(lines); i++ {
-		// A procedure follows this format 'move x from y to z'
-		// x: The number of crates to move
-		// y: The origin deque from which crates are removed
-		// z: The destination deque to which crates are added
+		// A procedure follows this format 'move n from s1 to s2'
+		// n: The number of crates to move
+		// s1: The origin deque from which crates are removed
+		// s2: The destination deque to which crates are added
 		subs := strings.Split(lines[i], " ")
 		if len(subs) != 6 {
 			return errors.New("invalid procedure input")
