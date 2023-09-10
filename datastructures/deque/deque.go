@@ -74,7 +74,7 @@ func (d *Deque[T]) PopBack() (T, error) {
 // Front returns the value at the front of the deque.
 func (d *Deque[T]) Front() (T, error) {
 	if d.IsEmpty() {
-		return *new(T), errors.New("deque id empty")
+		return *new(T), errors.New("deque is empty")
 	}
 	return d.head.next.value, nil
 }
@@ -82,7 +82,7 @@ func (d *Deque[T]) Front() (T, error) {
 // Back returns the value at the back of the deque.
 func (d *Deque[T]) Back() (T, error) {
 	if d.IsEmpty() {
-		return *new(T), errors.New("deque id empty")
+		return *new(T), errors.New("deque is empty")
 	}
 	return d.tail.prev.value, nil
 }

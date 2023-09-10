@@ -17,6 +17,9 @@ func supplyStacks(input string, part int) (string, error) {
 
 	// The input is divided into 2 parts: starting deques of crates and crates rearrangement
 	lines := strings.Split(input, "\n")
+	if len(lines) == 0 {
+		return ans, errors.New("invalid empty input")
+	}
 
 	// Initialize starting deques
 	var deques []*deque.Deque[string]
@@ -73,6 +76,10 @@ func rearrangeCrateDeques(index int, lines []string, deques []*deque.Deque[strin
 		// y: The origin deque from which crates are removed
 		// z: The destination deque to which crates are added
 		subs := strings.Split(lines[i], " ")
+		if len(subs) != 6 {
+			return errors.New("invalid procedure input")
+		}
+
 		n, err := strconv.Atoi(subs[1])
 		if err != nil {
 			return err
