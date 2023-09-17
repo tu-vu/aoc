@@ -5,7 +5,7 @@
 Solutions to [Advent of Code](https://adventofcode.com/) in different languages. Using this as code kata for learning new laguages.
 
 ### Languages:
--- [Go](https://github.com/tu-vu/aoc/tree/main/go)
--- Python
--- C++
--- Rust
+- [Go](https://github.com/tu-vu/aoc/tree/main/go)
+- Python
+- C++
+- Rust
