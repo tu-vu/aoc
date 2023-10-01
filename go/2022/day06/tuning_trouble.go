@@ -10,27 +10,27 @@ import (
 var content string
 
 func tuningTables(input string, part int) (ans int, err error) {
-	var step int
+	var n int
 	if part == 1 {
-		step = 4
+		n = 4
 	} else {
-		step = 14
+		n = 14
 	}
 	for _, line := range strings.Split(input, "\n") {
-		if len(line) < 4 {
+		if len(line) < n {
 			return ans, errors.New("invalid input")
 		}
-		// freq holds the frequency of each letter in step consecutive letters
+		// freq holds the frequency of each letter in n consecutive letters
 		freq := make([]int, 26)
-		for i := 0; i < step; i++ {
+		for i := 0; i < n; i++ {
 			freq[line[i]-'a']++
 		}
-		for i := step; i < len(line); i++ {
+		for i := n; i < len(line); i++ {
 			// Check if current window has duplicates
 			if !hasDuplicates(freq) {
 				return i, nil
 			}
-			freq[line[i-step]-'a']--
+			freq[line[i-n]-'a']--
 			freq[line[i]-'a']++
 		}
 	}
