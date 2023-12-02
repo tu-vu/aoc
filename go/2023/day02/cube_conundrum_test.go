@@ -1,11 +1,11 @@
-package day01
+package day02
 
 import (
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func TestTrebutchetPart1(t *testing.T) {
+func TestCubeConundrumPart1(t *testing.T) {
 	tests := []struct {
 		name    string
 		input   string
@@ -15,32 +15,32 @@ func TestTrebutchetPart1(t *testing.T) {
 		{
 			name:  "source",
 			input: content,
-			want:  56465,
+			want:  2528,
 		},
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			got := trebutchetPart1(tc.input)
+			got := cubeConundrumPart1(tc.input)
 			assert.Equal(t, tc.want, got)
 		})
 	}
 }
 
-func TestTrebutchetPart2(t *testing.T) {
+func TestCubeConundrumPart2(t *testing.T) {
 	tests := []struct {
 		name  string
 		input string
-		want  int
+		want  float64
 	}{
 		{
 			name:  "source",
 			input: content,
-			want:  55902,
+			want:  67363,
 		},
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			got := trebutchetPart2(tc.input)
+			got := cubeConundrumPart2(tc.input)
 			assert.Equal(t, tc.want, got)
 		})
 	}
