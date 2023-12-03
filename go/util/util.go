@@ -15,3 +15,10 @@ func ReverseString(s string) string {
 	}
 	return string(runes)
 }
+
+func Min(x, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
