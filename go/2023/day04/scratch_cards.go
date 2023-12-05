@@ -45,34 +45,36 @@ func scratchCardsPart2(input string) int {
 		panic(err)
 	}
 	// Initialize map of card to its number of copies
-	sum := len(winningCards)
-	cardCopies := make(map[int]int, 0)
+	cardToMatchesCount := make(map[int]int)
 	for i := 0; i < len(winningCards); i++ {
-		cardCopies[i] = 1
-	}
-	for i := 0; i < len(winningCards); i++ {
-		for cardCopies[i] > 0 {
-			// Populate set of winning numbers
-			winningNums := set.New[int]()
-			for _, num := range winningCards[i] {
-				winningNums.Add(num)
-			}
-			// Count the number of winning numbers in existing cards
-			var count int
-			for j := 0; j < len(existingCards[i]); j++ {
-				if winningNums.Has(existingCards[i][j]) {
-					count++
-				}
-			}
-			// Update copies of the later cards based on the count
-			for k := i + 1; k < i+1+count; k++ {
-				cardCopies[k]++
-			}
-			// Update the count of copies of card i
-			cardCopies[i]--
-			// Update the sum
-			sum += count
+		// Populate set of winning numbers
+		winningNums := set.New[int]()
+		for _, num := range winningCards[i] {
+			winningNums.Add(num)
 		}
+		// Count the number of winning numbers in existing cards
+		var count int
+		for j := 0; j < len(existingCards[i]); j++ {
+			if winningNums.Has(existingCards[i][j]) {
+				count++
+			}
+		}
+		// Map the card to its number of matches
+		cardToMatchesCount[i] = count
+	}
+	// dp[i] is the number of copies required to process the ith card
+	dp := make([]int, len(winningCards))
+	for i := len(winningCards) - 1; i >= 0; i-- {
+		// Every card starts with 1 copy of itself
+		dp[i] = 1
+		// Update cached value with the number of copies of the cards that it matches
+		for j := i + 1; j < i+1+cardToMatchesCount[i]; j++ {
+			dp[i] += dp[j]
+		}
+	}
+	var sum int
+	for i := 0; i < len(dp); i++ {
+		sum += dp[i]
 	}
 	return sum
 }
