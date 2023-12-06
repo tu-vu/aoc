@@ -54,8 +54,8 @@ func scratchCardsPart2(input string) int {
 		}
 		// Count the number of winning numbers in existing cards
 		var count int
-		for j := 0; j < len(existingCards[i]); j++ {
-			if winningNums.Has(existingCards[i][j]) {
+		for _, num := range existingCards[i] {
+			if winningNums.Has(num) {
 				count++
 			}
 		}
